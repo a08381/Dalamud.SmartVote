@@ -26,17 +26,13 @@ namespace ClickLib.Clicks
         /// </summary>
         [ClickName("grand_company_expert_delivery_deliver")]
         public void Deliver()
-        {
-            ClickAddonButton(&this.Addon->AtkUnitBase, this.Addon->DeliverButton, 0);
-        }
+            => this.ClickButton(0, this.Type->DeliverButton);
 
         /// <summary>
         /// Click the cancel button.
         /// </summary>
         [ClickName("grand_company_expert_delivery_cancel")]
         public void Cancel()
-        {
-            ClickAddonButton(&this.Addon->AtkUnitBase, this.Addon->CancelButton, 1);
-        }
+            => this.ClickButton(1, this.Type->CancelButton);
     }
 }

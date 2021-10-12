@@ -27,17 +27,13 @@ namespace ClickLib.Clicks
         /// </summary>
         [ClickName("item_inspection_result_next")]
         public void Next()
-        {
-            ClickAddonButton(&this.Addon->AtkUnitBase, (AtkComponentButton*)this.Addon->AtkUnitBase.UldManager.NodeList[2], 0);
-        }
+            => this.ClickButton(0, (AtkComponentButton*)this.Type->AtkUnitBase.UldManager.NodeList[2]);
 
         /// <summary>
         /// Click the close button.
         /// </summary>
         [ClickName("item_inspection_result_close")]
         public void Close()
-        {
-            ClickAddonButton(&this.Addon->AtkUnitBase, (AtkComponentButton*)this.Addon->AtkUnitBase.UldManager.NodeList[3], 0xFFFF_FFFF);
-        }
+            => this.ClickButton(0xFFFFFFFF, (AtkComponentButton*)this.Type->AtkUnitBase.UldManager.NodeList[3]);
     }
 }

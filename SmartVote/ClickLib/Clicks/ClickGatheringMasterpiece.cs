@@ -26,8 +26,6 @@ namespace ClickLib.Clicks
         /// </summary>
         [ClickName("collect")]
         public void Collect()
-        {
-            ClickAddonDragDrop(&this.Addon->AtkUnitBase, this.Addon->CollectDragDrop, 112);
-        }
+            => this.ClickDragDrop(112, this.Type->CollectDragDrop);
     }
 }

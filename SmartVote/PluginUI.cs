@@ -1,11 +1,12 @@
 ﻿using Dalamud.Interface;
 using ImGuiNET;
+using System;
 using System.Numerics;
 using System.Text;
 
 namespace SmartVote
 {
-	class PluginUI
+	class PluginUI : IDisposable
 	{
 		private Configuration configuration;
 		private bool settingsvisible;
@@ -17,6 +18,10 @@ namespace SmartVote
 		}
 
 		public PluginUI(Configuration configuration) => this.configuration = configuration;
+
+		public void Dispose()
+		{
+		}
 
 		public void Draw()
 		{

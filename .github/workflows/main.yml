@@ -36,27 +36,27 @@ jobs:
       - name: Protect
         run: |
           cd "$Env:GITHUB_WORKSPACE"
-          .\Lib\.NET_Reactor\dotNET_Reactor.Console.exe -file ".\SmartVote\bin\Release\net5.0-windows\SmartVote.dll" -antitamp 1 -hide_calls 1 -control_flow_obfuscation 1 -flow_level 9 -resourceencryption 1
-          Move-Item -Path .\SmartVote\bin\Release\net5.0-windows\SmartVote_Secure\* -Destination .\SmartVote\bin\Release\net5.0-windows -Force
-          Remove-Item -Path .\SmartVote\bin\Release\net5.0-windows\SmartVote_Secure -Force -Recurse
-          Remove-Item -Path .\SmartVote\bin\Release\net5.0-windows\SmartVote -Force -Recurse
-          Remove-Item -Path .\SmartVote\bin\Release\net5.0-windows\ref -Force -Recurse
-          Remove-Item -Path .\SmartVote\bin\Release\net5.0-windows\SmartVote.deps.json -Force -Recurse
+          .\Lib\.NET_Reactor\dotNET_Reactor.Console.exe -file ".\SmartVote\bin\Release\net5.0\SmartVote.dll" -antitamp 1 -hide_calls 1 -control_flow_obfuscation 1 -flow_level 9 -resourceencryption 1
+          Move-Item -Path .\SmartVote\bin\Release\net5.0\SmartVote_Secure\* -Destination .\SmartVote\bin\Release\net5.0 -Force
+          Remove-Item -Path .\SmartVote\bin\Release\net5.0\SmartVote_Secure -Force -Recurse
+          Remove-Item -Path .\SmartVote\bin\Release\net5.0\SmartVote -Force -Recurse
+          Remove-Item -Path .\SmartVote\bin\Release\net5.0\ref -Force -Recurse
+          Remove-Item -Path .\SmartVote\bin\Release\net5.0\SmartVote.deps.json -Force -Recurse
           mkdir -Path .\SmartVote\bin\Package\
       - name: Package
         uses: papeloto/action-zip@v1
         with:
-          files: SmartVote\bin\Release\net5.0-windows\SmartVote.dll SmartVote\bin\Release\net5.0-windows\SmartVote.json SmartVote\bin\Release\net5.0-windows\SmartVote.pdb
+          files: SmartVote\bin\Release\net5.0\SmartVote.dll SmartVote\bin\Release\net5.0\SmartVote.json SmartVote\bin\Release\net5.0\SmartVote.pdb
           dest: SmartVote\bin\Package\latest.zip
       - name: Package
         run: |
           cd "$Env:GITHUB_WORKSPACE"
-          Copy-Item -Path .\SmartVote\bin\Release\net5.0-windows\SmartVote.json -Destination .\SmartVote\bin\Package\
+          Copy-Item -Path .\SmartVote\bin\Release\net5.0\SmartVote.json -Destination .\SmartVote\bin\Package\
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
           name: SmartVote
-          path: ${{ github.workspace }}\SmartVote\bin\Release\net5.0-windows
+          path: ${{ github.workspace }}\SmartVote\bin\Release\net5.0
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
