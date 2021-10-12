@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <OutputType>Library</OutputType>
+    <PlatformTarget>x64</PlatformTarget>
+    <Platforms>x64;AnyCPU</Platforms>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DalamudPackager" Version="2.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Dalamud">
+      <HintPath>..\Lib\Dalamud\Dalamud.dll</HintPath>
+    </Reference>
+    <Reference Include="FFXIVClientStructs">
+      <HintPath>..\Lib\Dalamud\FFXIVClientStructs.dll</HintPath>
+    </Reference>
+    <Reference Include="ImGui.NET">
+      <HintPath>..\Lib\Dalamud\ImGui.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="Lumina">
+      <HintPath>..\Lib\Dalamud\Lumina.dll</HintPath>
+    </Reference>
+    <Reference Include="Lumina.Excel">
+      <HintPath>..\Lib\Dalamud\Lumina.Excel.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
