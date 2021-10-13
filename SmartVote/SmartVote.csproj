@@ -16,18 +16,23 @@
   <ItemGroup>
     <Reference Include="Dalamud">
       <HintPath>..\Lib\Dalamud\Dalamud.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="FFXIVClientStructs">
       <HintPath>..\Lib\Dalamud\FFXIVClientStructs.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ImGui.NET">
       <HintPath>..\Lib\Dalamud\ImGui.NET.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Lumina">
       <HintPath>..\Lib\Dalamud\Lumina.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Lumina.Excel">
       <HintPath>..\Lib\Dalamud\Lumina.Excel.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
 
