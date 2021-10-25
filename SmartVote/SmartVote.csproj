@@ -28,6 +28,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\lib\ClickLib\ClickLib\ClickLib.csproj" />
+    <ProjectReference Include="..\lib\FFXIVClientStructs\FFXIVClientStructs\FFXIVClientStructs.csproj" />
     <Reference Include="Dalamud">
       <HintPath>$(DalamudLibPath)Dalamud.dll</HintPath>
       <Private>False</Private>
@@ -44,8 +46,6 @@
       <HintPath>$(DalamudLibPath)Lumina.Excel.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <ProjectReference Include="..\lib\FFXIVClientStructs\FFXIVClientStructs\FFXIVClientStructs.csproj" />
-    <ProjectReference Include="..\lib\ClickLib\ClickLib\ClickLib.csproj" />
   </ItemGroup>
 
   <Target Name="ILRepack" AfterTargets="Build">
