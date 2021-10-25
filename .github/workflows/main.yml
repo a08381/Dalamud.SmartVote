@@ -23,13 +23,19 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+        with:
+          submodules: recursive
 
       - name: Setup Nuget
         uses: nuget/setup-nuget@v1
         with:
           nuget-version: latest
       - name: Restore Nuget Packages
-        run: nuget restore SmartVote.sln
+        run: |
+          New-Item -Path $Env:GITHUB_WORKSPACE\lib\ClickLib\lib -ItemType SymbolicLink -Value $Env:GITHUB_WORKSPACE\lib
+          nuget restore $Env:GITHUB_WORKSPACE\lib\FFXIVClientStructs\FFXIVClientStructs.sln
+          nuget restore $Env:GITHUB_WORKSPACE\lib\ClickLib\ClickLib.sln
+          nuget restore $Env:GITHUB_WORKSPACE\SmartVote.sln
       - name: Build
         run: |
           dotnet build $Env:GITHUB_WORKSPACE\lib\FFXIVClientStructs\FFXIVClientStructs.sln /p:Configuration=Release /p:DefineConstants=XL_NOAUTOUPDATE
