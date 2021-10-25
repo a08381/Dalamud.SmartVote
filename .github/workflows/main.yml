@@ -38,9 +38,10 @@ jobs:
           nuget restore $Env:GITHUB_WORKSPACE\SmartVote.sln
       - name: Build
         run: |
+          cd "$Env:GITHUB_WORKSPACE"
           dotnet build $Env:GITHUB_WORKSPACE\lib\FFXIVClientStructs\FFXIVClientStructs.sln /p:Configuration=Release /p:DefineConstants=XL_NOAUTOUPDATE
-          dotnet build $Env:GITHUB_WORKSPACE\lib\ClickLib\ClickLib.sln /p:Configuration=Release /p:DefineConstants=XL_NOAUTOUPDATE
-          dotnet build $Env:GITHUB_WORKSPACE\SmartVote.sln /p:Configuration=Release /p:DefineConstants=XL_NOAUTOUPDATE
+          dotnet build $Env:GITHUB_WORKSPACE\lib\ClickLib\ClickLib\ClickLib.csproj /p:Configuration=Release /p:DefineConstants=XL_NOAUTOUPDATE
+          dotnet build $Env:GITHUB_WORKSPACE\SmartVote\SmartVote.csproj /p:Configuration=Release /p:DefineConstants=XL_NOAUTOUPDATE
       #- name: Protect
       #  run: |
       #    cd "$Env:GITHUB_WORKSPACE"
