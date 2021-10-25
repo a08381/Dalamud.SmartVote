@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net5.0-windows</TargetFramework>
     <OutputType>Library</OutputType>
     <PlatformTarget>x64</PlatformTarget>
     <Platforms>x64;AnyCPU</Platforms>
@@ -9,31 +9,60 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <DalamudLibPath>..\lib\Dalamud\</DalamudLibPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="..\stylecop.json" />
+    <AdditionalFiles Include="..\.github\workflows\main.yml" />
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="DalamudPackager" Version="2.1.4" />
+    <PackageReference Include="ILRepack" Version="2.0.18" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
     <Reference Include="Dalamud">
-      <HintPath>..\Lib\Dalamud\Dalamud.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="FFXIVClientStructs">
-      <HintPath>..\Lib\Dalamud\FFXIVClientStructs.dll</HintPath>
+      <HintPath>$(DalamudLibPath)Dalamud.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ImGui.NET">
-      <HintPath>..\Lib\Dalamud\ImGui.NET.dll</HintPath>
+      <HintPath>$(DalamudLibPath)ImGui.NET.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Lumina">
-      <HintPath>..\Lib\Dalamud\Lumina.dll</HintPath>
+      <HintPath>$(DalamudLibPath)Lumina.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Lumina.Excel">
-      <HintPath>..\Lib\Dalamud\Lumina.Excel.dll</HintPath>
+      <HintPath>$(DalamudLibPath)Lumina.Excel.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <ProjectReference Include="..\lib\FFXIVClientStructs\FFXIVClientStructs\FFXIVClientStructs.csproj" />
+    <ProjectReference Include="..\lib\ClickLib\ClickLib\ClickLib.csproj" />
   </ItemGroup>
+
+  <Target Name="ILRepack" AfterTargets="Build">
+    <ItemGroup>
+      <InputAssemblies Include="$(TargetPath)" />
+      <InputAssemblies Include="$(TargetDir)*.dll" Exclude="$(TargetPath)" />
+    </ItemGroup>
+    <Exec Command="$(PkgILRepack)\tools\ILRepack.exe /lib:$(DalamudLibPath) /out:$(TargetDir)$(TargetFileName) @(InputAssemblies, ' ')" />
+  </Target>
+
+  <Target Name="CleanOutDir" AfterTargets="ILRepack">
+    <ItemGroup>
+      <DeleteAssemblies Include="$(TargetDir)*.dll" Exclude="$(TargetDir)$(TargetName).dll" />
+      <DeleteAssemblies Include="$(TargetDir)*.pdb" Exclude="$(TargetDir)$(TargetName).pdb" />
+    </ItemGroup>
+    <Message Text="Deleting @(DeleteAssemblies)" Importance="high" />
+    <Delete Files="@(DeleteAssemblies)" />
+  </Target>
 
 </Project>
