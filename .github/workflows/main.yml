@@ -30,12 +30,6 @@ jobs:
         uses: nuget/setup-nuget@v1
         with:
           nuget-version: latest
-      - name: Restore Nuget Packages
-        run: |
-          New-Item -Path $Env:GITHUB_WORKSPACE\lib\ClickLib\lib -ItemType SymbolicLink -Value $Env:GITHUB_WORKSPACE\lib
-          nuget restore $Env:GITHUB_WORKSPACE\lib\FFXIVClientStructs\FFXIVClientStructs.sln
-          nuget restore $Env:GITHUB_WORKSPACE\lib\ClickLib\ClickLib.sln
-          nuget restore $Env:GITHUB_WORKSPACE\SmartVote.sln
       - name: Build
         run: |
           cd "$Env:GITHUB_WORKSPACE"
@@ -58,6 +52,7 @@ jobs:
           Remove-Item -Path .\SmartVote\bin\Release\net5.0-windows\SmartVote -Force -Recurse
           Remove-Item -Path .\SmartVote\bin\Release\net5.0-windows\ref -Force -Recurse
           Remove-Item -Path .\SmartVote\bin\Release\net5.0-windows\SmartVote.deps.json -Force -Recurse
+          Remove-Item -Path .\SmartVote\bin\Release\net5.0-windows\ClickLib.xml -Force -Recurse
           mkdir -Path .\SmartVote\bin\Package\
       - name: Package
         uses: papeloto/action-zip@v1
